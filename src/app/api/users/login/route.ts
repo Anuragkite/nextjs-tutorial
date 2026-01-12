@@ -33,7 +33,8 @@ export async function POST(request: NextRequest) {
         username:user.username
         }
     // create token w/ jwt
-     const token = await jwt(tokenData,process.env.TOKEN_SECRET!,{expiresIn:"1hr"})//token created w/ this now needed to add into cookies 
+     const token = jwt.sign(tokenData, process.env.TOKEN_SECRET!, { expiresIn: "1hr" }) //token created w/ this now needed to add into cookies 
+//token created w/ this now needed to add into cookies 
 
     //To create the cookies we hv to make a NextResponse then we can set cookies of user
     const response = NextResponse.json({message:"login Successfully"}, {status:200})
@@ -51,9 +52,9 @@ export async function POST(request: NextRequest) {
         "Login wale routes wale file me issue aya hai !",
         error.message
       );
-      return NextResponse.json({
-        status: 500,
-      });
+      return NextResponse.json(
+        {error:error.message},
+        {status: 500});
     }
   }
 }

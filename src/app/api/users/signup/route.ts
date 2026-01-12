@@ -2,7 +2,7 @@ import { connect } from "@dbconfig/dbConfig";
 import User from "@models/userModels";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import { collectSegmentData } from "next/dist/server/app-render/collect-segment-data";
+
 
 connect();
 

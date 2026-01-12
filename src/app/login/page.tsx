@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { axios } from "axios";
-import { NextResponse } from "next/server";
+import axios  from "axios";
+import toast from "react-hot-toast";
 
 export default function SignIn() {
     const router = useRouter();
@@ -31,14 +31,16 @@ export default function SignIn() {
         try {
           setLoading(true);
           const response =  await axios.post("/api/users/login",user);
-          console.log(response);
+          console.log(response.data);
+          toast.success("Login Success");
+          router.push("/profile")
 
-          return NextResponse.json({})
+         
             
         } catch (error) {
             if(error instanceof Error )
                 console.log("issue in login ", error.message);
-            return NextResponse.json({message:"Something wrong w/ login,fix it!"},{status:401})
+            
         } finally{
             setLoading(false);
         }
@@ -46,7 +48,7 @@ export default function SignIn() {
 
     return (
         <div className="flex flex-col items-center  justify-center min-h-screen py-2">
-            <h1>Login Page !!</h1>
+            <h1>{Loading ? "Processing":"Login Page !!"}</h1>
 
 
             <label
