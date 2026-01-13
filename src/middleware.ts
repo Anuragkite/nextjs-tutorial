@@ -9,7 +9,7 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value || "";
 
   if (isPublicPath && token) {
-    return NextResponse.redirect(new URL("/", request.nextUrl)); 
+    return NextResponse.redirect(new URL("/profile", request.nextUrl)); 
     //telling us that redirect the user to the '/login' and request.nextUrl saying that you have to replace the curr. address w/ given 1st argument
   }
 
